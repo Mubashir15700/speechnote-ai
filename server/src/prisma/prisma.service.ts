@@ -1,4 +1,3 @@
-
 import {
     Injectable,
     OnModuleDestroy,
@@ -7,6 +6,8 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { PrismaMariaDb } from '@prisma/adapter-mariadb';
 import { PrismaClient } from '../generated/prisma/client.js';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 @Injectable()
 export class PrismaService
@@ -17,12 +18,20 @@ export class PrismaService
             configService.getOrThrow<string>('DATABASE_URL'),
         );
 
+        const ca = readFileSync(
+            resolve(process.cwd(), 'certs/ca.pem'),
+            'utf8',
+        );
+
         const adapter = new PrismaMariaDb({
             host: databaseUrl.hostname,
             port: Number(databaseUrl.port || 3306),
             user: decodeURIComponent(databaseUrl.username),
             password: decodeURIComponent(databaseUrl.password),
             database: databaseUrl.pathname.slice(1),
+            ssl: {
+                ca,
+            },
             connectionLimit: 5,
         });
 
