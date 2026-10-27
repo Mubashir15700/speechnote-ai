@@ -32,6 +32,7 @@ export class PrismaService
             ssl: {
                 ca,
             },
+            connectTimeout: 10000,
             connectionLimit: 5,
         });
 
