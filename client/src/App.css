@@ -1,0 +1,465 @@
+#root {
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f7f8fc;
+  color: #20243a;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #c4b5fd;
+  outline-offset: 3px;
+}
+
+.app {
+  width: min(900px, 92%);
+  margin: 0 auto;
+  padding: 28px 0 20px;
+}
+
+/* Header */
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #6658e8, #4937b8);
+  color: white;
+  font-size: 22px;
+  font-weight: 750;
+  box-shadow: 0 5px 14px #5145cd30;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 21px;
+  letter-spacing: -0.5px;
+}
+
+.badge {
+  margin-left: auto;
+  padding: 7px 12px;
+  border: 1px solid #e3defe;
+  border-radius: 20px;
+  background: #f0edff;
+  color: #5145cd;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Hero */
+
+.hero {
+  padding: 68px 0 36px;
+  text-align: center;
+}
+
+.eyebrow {
+  color: #6254d8;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 1.8px;
+}
+
+.hero h2 {
+  margin: 16px 0;
+  font-size: clamp(32px, 5vw, 46px);
+  line-height: 1.15;
+  letter-spacing: -1.8px;
+}
+
+.subtitle {
+  max-width: 560px;
+  margin: 0 auto;
+  color: #70758a;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* Main cards */
+
+.recorder,
+.history {
+  padding: 26px;
+  border: 1px solid #e7e8f0;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 12px 36px #25264d08;
+}
+
+.history {
+  margin-top: 24px;
+}
+
+.recorder-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.recorder-header h3 {
+  margin: 0 0 7px;
+  font-size: 18px;
+  letter-spacing: -0.4px;
+}
+
+.recorder-header p {
+  margin: 0;
+  color: #777c90;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Recording status */
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 11px;
+  border: 1px solid #e8e9f0;
+  border-radius: 20px;
+  background: #fafaff;
+  color: #6f7487;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #a4a8b7;
+}
+
+.status.active {
+  border-color: #fecaca;
+  background: #fff1f2;
+  color: #be123c;
+}
+
+.status.active .status-dot {
+  background: #ef4444;
+  box-shadow: 0 0 0 4px #fee2e2;
+}
+
+/* Title input */
+
+.recorder label {
+  display: block;
+  margin-bottom: 9px;
+  color: #42475c;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.recorder input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #dfe2ec;
+  border-radius: 10px;
+  background: #fff;
+  color: #20243a;
+  outline: none;
+}
+
+.recorder input:focus {
+  border-color: #8b80ed;
+  box-shadow: 0 0 0 3px #5145cd12;
+}
+
+.recorder input::placeholder {
+  color: #a0a4b3;
+}
+
+/* Transcript editor */
+
+.transcript-area {
+  min-height: 200px;
+  margin: 20px 0;
+  padding: 20px;
+  overflow-wrap: anywhere;
+  border: 1px solid #e5e7f0;
+  border-radius: 13px;
+  background: #fbfbfe;
+  color: #34394e;
+  line-height: 1.85;
+  white-space: pre-wrap;
+}
+
+.transcript-area p {
+  margin: 0;
+}
+
+.placeholder {
+  color: #969bad;
+}
+
+/* Buttons */
+
+.recorder-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.record-button,
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 11px 16px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.record-button {
+  background: #5145cd;
+  color: #fff;
+  box-shadow: 0 4px 10px #5145cd20;
+}
+
+.record-button:hover:not(:disabled) {
+  background: #4336b5;
+  transform: translateY(-1px);
+}
+
+.record-button.recording {
+  background: #dc3545;
+}
+
+.record-button.recording:hover:not(:disabled) {
+  background: #bd2635;
+}
+
+.secondary-button {
+  border-color: #e4e6ef;
+  background: #fff;
+  color: #4b5065;
+}
+
+.secondary-button:hover:not(:disabled) {
+  border-color: #c9c4f6;
+  background: #f6f5ff;
+}
+
+.record-button:disabled,
+.secondary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+}
+
+/* Feedback and backend status */
+
+[role="alert"],
+[role="status"] {
+  margin: 16px 0 0;
+  padding: 11px 13px;
+  border-radius: 9px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+[role="alert"] {
+  border: 1px solid #fecaca;
+  background: #fff1f2;
+  color: #b42332;
+}
+
+[role="status"] {
+  border: 1px solid #bbf7d0;
+  background: #f0fdf4;
+  color: #187341;
+}
+
+.hint {
+  margin: 16px 0 0;
+  color: #888da0;
+  font-size: 12px;
+}
+
+.api-status {
+  margin: 20px 0 0;
+  color: #777c90;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Saved transcript history */
+
+.history ul {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.history li {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #e9eaf2;
+  border-radius: 13px;
+  background: #fdfdff;
+}
+
+.transcript-item-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.history li p {
+  margin: 10px 0 0;
+  overflow-wrap: anywhere;
+  color: #777c90;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.history li p:last-child {
+  color: #44495d;
+}
+
+.history>.placeholder {
+  padding: 22px 0;
+  text-align: center;
+}
+
+/* Footer */
+
+footer {
+  padding: 30px 0 10px;
+  color: #9296a7;
+  text-align: center;
+  font-size: 12px;
+}
+
+/* Responsive layout */
+
+@media (max-width: 600px) {
+  .app {
+    width: min(100% - 28px, 900px);
+    padding-top: 18px;
+  }
+
+  .header h1 {
+    font-size: 18px;
+  }
+
+  .badge {
+    padding: 6px 8px;
+    font-size: 10px;
+  }
+
+  .hero {
+    padding: 48px 0 28px;
+  }
+
+  .hero h2 {
+    font-size: clamp(30px, 8vw, 38px);
+    letter-spacing: -1.2px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .recorder,
+  .history {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .recorder-header {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .recorder-header h3 {
+    font-size: 16px;
+  }
+
+  .status {
+    padding: 7px 9px;
+    font-size: 11px;
+  }
+
+  .transcript-area {
+    min-height: 180px;
+    padding: 15px;
+  }
+
+  .recorder-actions {
+    align-items: stretch;
+  }
+
+  .recorder-actions button {
+    flex: 1 1 auto;
+  }
+
+  .history li {
+    padding: 13px;
+  }
+}
+
+@media (max-width: 380px) {
+  .header {
+    gap: 8px;
+  }
+
+  .logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .header h1 {
+    font-size: 16px;
+  }
+
+  .badge {
+    font-size: 9px;
+  }
+
+  .recorder-header {
+    flex-direction: column;
+  }
+}
